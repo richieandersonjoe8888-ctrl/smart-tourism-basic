@@ -30,6 +30,13 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+
+            // Add your custom optional fields here
+            'age' => fake()->optional(0.8)->numberBetween(18, 70), // 80% chance of generating an age
+            'gender' => fake()->optional(0.7)->randomElement(['male', 'female',]),
+            'nationality' => fake()->optional(0.6)->country(),
+            'city_of_origin' => fake()->optional(0.6)->city(),
+            'status' => fake()->randomElement(['active',]),
         ];
     }
 
@@ -40,6 +47,25 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+    /**
+     * State transformation to explicitly generate a frozen account.
+     */
+    public function frozen(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => 'frozen',
+        ]);
+    }
+
+    /**
+     * State transformation to explicitly generate a deactivated account.
+     */
+    public function deactivated(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => 'deactivated',
         ]);
     }
 }

@@ -51,11 +51,6 @@
                 <option value="">{{ __('Select...') }}</option>
                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>{{ __('Female') }}</option>
                 <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>{{ __('Male') }}</option>
-                <option value="non-binary" {{ old('gender') == 'non-binary' ? 'selected' : '' }}>{{ __('Non-binary') }}
-                </option>
-                <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>{{ __('Other') }}</option>
-                <option value="prefer-not-to-say" {{ old('gender') == 'prefer-not-to-say' ? 'selected' : '' }}>
-                    {{ __('Prefer not to say') }}</option>
             </select>
             <x-input-error :messages="$errors->get('gender')" class="mt-2" />
         </div>

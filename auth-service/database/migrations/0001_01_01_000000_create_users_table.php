@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('city_of_origin')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->string('status')->default('active');;
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
