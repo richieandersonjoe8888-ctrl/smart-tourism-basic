@@ -1,7 +1,10 @@
+<?php
+
 namespace Database\Seeders;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,23 +16,29 @@ class DatabaseSeeder extends Seeder
         $vendorRole = Role::create(['name' => 'vendor']);
         $adminRole = Role::create(['name' => 'admin']);
 
-        // 2. Seed 10 random customer users and attach the 'user' role
+        // 2. Seed Default Smart Tourism / Shop Business Tags
+        $defaultTags = ['museum', 'historical', 'cultural', 'food and beverage', 'nature', 'accommodation'];
+        foreach ($defaultTags as $tagName) {
+            Tag::create(['name' => $tagName]);
+        }
+
+        // 3. Seed 10 random customer users and attach the 'user' role
         User::factory(10)->create()->each(function ($user) {
-            $user->roles()->attach(1); // Attach 'user' role
+            $user->roles()->attach(1); 
         });
 
-        // 3. Create a dedicated Admin account for testing
+        // 4. Create dedicated Admin account for testing
         $admin = User::factory()->create([
             'email' => 'admin@test.com',
             'password' => bcrypt('password'),
         ]);
-        $admin->roles()->attach([$userRole->id, $adminRole->id]); // Admin is both a user and an admin
+        $admin->roles()->attach([$userRole->id, $adminRole->id]);
 
-        // 4. Create a dedicated Vendor account for testing
+        // 5. Create dedicated Vendor account for testing
         $vendor = User::factory()->create([
             'email' => 'vendor@test.com',
             'password' => bcrypt('password'),
         ]);
-        $vendor->roles()->attach([$userRole->id, $vendorRole->id]); // Vendor is both a user and a vendor
+        $vendor->roles()->attach([$userRole->id, $vendorRole->id]);
     }
 }
