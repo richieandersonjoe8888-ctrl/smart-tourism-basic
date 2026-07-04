@@ -8,14 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // 1. Master List of Business Tags
-        Schema::create('tags', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique(); // museum, historical, cultural, etc.
-            $table->timestamps();
-        });
+        // NOTE: The 'tags' table was already created in the previous dashboard migration,
+        // so we only create the profiles and the pivot relationship table here.
 
-        // 2. Vendor Profiles
+        // 1. Vendor Profiles
         Schema::create('vendor_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained('users')->onDelete('cascade');
@@ -26,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // 3. Pivot table linking Profiles to Tags
+        // 2. Pivot table linking Profiles to Tags
         Schema::create('tag_vendor_profile', function (Blueprint $table) {
             $table->id();
             $table->foreignId('vendor_profile_id')->constrained()->onDelete('cascade');
@@ -38,6 +34,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('tag_vendor_profile');
         Schema::dropIfExists('vendor_profiles');
-        Schema::dropIfExists('tags');
+        // We leave 'tags' table drop logic to its original file
     }
 };

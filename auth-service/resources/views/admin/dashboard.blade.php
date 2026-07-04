@@ -94,7 +94,24 @@
                     </tbody>
                 </table>
             </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Global Business Tag Management</h2>
+    
+    <form action="{{ route('admin.tags.store') }}" method="POST" class="flex gap-3 mb-6 max-w-md">
+        @csrf
+        <input type="text" name="name" placeholder="e.g., historical, adventure, cafe" class="text-sm rounded border-gray-300 w-full" required>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700 whitespace-nowrap">Add Tag</button>
+    </form>
 
+    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Active Categories</h3>
+    <div class="flex flex-wrap gap-2">
+        @foreach($allTags as $tag)
+            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full border">
+                {{ $tag->name }}
+            </span>
+        @endforeach
+    </div>
+</div>
         </div>
     </div>
 </x-app-layout>
