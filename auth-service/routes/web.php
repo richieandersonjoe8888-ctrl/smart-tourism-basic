@@ -4,28 +4,29 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorApplicationController;
 
+// 1. Your original default welcome page
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Protect your admin console with both auth and your custom role middleware
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    // The main dashboard view
-    Route::get('/admin/panel', [AdminController::class, 'index'])->name('admin.panel');
-    
-    // Action routes for dashboard buttons
-    Route::post('/admin/vendor/{user}/handle', [AdminController::class, 'handleVendorRequest'])->name('admin.vendor.handle');
-    Route::post('/admin/user/{user}/ban', [AdminController::class, 'toggleUserBan'])->name('admin.user.ban');
-    Route::post('/admin/tags', [AdminController::class, 'storeTag'])->name('admin.tags.store');
-    Route::post('/admin/applications/{application}/handle', [AdminController::class, 'handleApplicationAction'])->name('admin.application.handle');
+// 2. The standard user dashboard route (Breeze standard)
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// 3. User-facing Vendor Onboarding Applications
+Route::middleware(['auth'])->group(function () {
+    Route::get('/vendor/apply', [VendorApplicationController::class, 'showForm'])->name('vendor.apply.form');
+    Route::post('/vendor/apply', [VendorApplicationController::class, 'storeApplication'])->middleware('throttle:2,1440')->name('vendor.apply.store');
 });
 
-Route::middleware(['auth'])->group(function () {
-    // Show the application page or waiting status screen
-    Route::get('/vendor/apply', [VendorApplicationController::class, 'showForm'])->name('vendor.apply.form');
-    
-    // Process form submission (Throttled to max 2 attempts per 24 hours per user account)
-    Route::post('/vendor/apply', [VendorApplicationController::class, 'storeApplication'])
-        ->middleware('throttle:2,1440')
-        ->name('vendor.apply.store');
+// 4. Secure Administrative Console
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/panel', [AdminController::class, 'index'])->name('admin.panel');
+    Route::post('/admin/applications/{application}/handle', [AdminController::class, 'handleApplicationAction'])->name('admin.application.handle');
+    Route::post('/admin/user/{user}/ban', [AdminController::class, 'toggleUserBan'])->name('admin.user.ban');
+    Route::post('/admin/tags', [AdminController::class, 'storeTag'])->name('admin.tags.store');
 });
+
+// 5. THE CRITICAL LINK: This pulls back your login/register features from yesterday!
+require __DIR__.'/auth.php';
