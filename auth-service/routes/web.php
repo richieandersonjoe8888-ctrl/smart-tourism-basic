@@ -26,7 +26,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/applications/{application}/handle', [AdminController::class, 'handleApplicationAction'])->name('admin.application.handle');
     Route::post('/admin/user/{user}/ban', [AdminController::class, 'toggleUserBan'])->name('admin.user.ban');
     Route::post('/admin/tags', [AdminController::class, 'storeTag'])->name('admin.tags.store');
+    // Inside your Route::middleware(['auth', 'role:admin'])->group block:
+    Route::post('/admin/blogs/{blog}/handle', [AdminController::class, 'handleBlogAction'])->name('admin.blog.handle');
 });
 
 // 5. THE CRITICAL LINK: This pulls back your login/register features from yesterday!
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
