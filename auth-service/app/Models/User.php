@@ -12,7 +12,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
-    'email', 'password', 'status', 'age', 'gender', 'nationality', 'city_of_origin'
+    'email',
+    'password',
+    'status',
+    'age',
+    'gender',
+    'nationality',
+    'city_of_origin'
 ])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -53,5 +59,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function vendorApplication()
+    {
+        return $this->hasOne(VendorApplication::class);
     }
 }
