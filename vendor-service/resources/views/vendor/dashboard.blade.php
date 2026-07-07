@@ -86,13 +86,20 @@
                     <p class="text-xs text-gray-500">Draft articles are sent straight to the admin pipeline for moderation
                         and approval before public distribution.</p>
 
-                    <form action="{{ route('vendor.blog.store') }}" method="POST" class="space-y-4 pt-2">
+                    <form action="http://127.0.0.1:9999/api/blogs/store" method="POST" enctype="multipart/form-data"
+                        class="space-y-4 pt-2">
                         @csrf
                         <div>
                             <label for="title" class="block text-sm font-medium text-gray-700">Article Title</label>
                             <input type="text" name="title" id="title"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 placeholder="e.g., Top 5 Hidden Exhibits This Week" required>
+                        </div>
+
+                        <div>
+                            <label for="image" class="block text-sm font-medium text-gray-700">Cover Banner Image</label>
+                            <input type="file" name="image" id="image"
+                                class="mt-1 block w-full text-xs text-gray-500 cursor-pointer">
                         </div>
 
                         <div>
