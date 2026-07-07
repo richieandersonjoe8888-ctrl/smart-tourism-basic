@@ -22,7 +22,19 @@
             </div>
         </div>
     </nav>
-
+<div class="flex items-center space-x-4 text-sm text-gray-600">
+    <span class="bg-green-100 text-green-800 font-semibold px-2.5 py-0.5 rounded-full text-xs">Vendor Node</span>
+    <span class="font-medium">{{ Auth::user()->name }}</span>
+    
+    <a href="http://127.0.0.1:8888/profile" class="text-indigo-600 hover:text-indigo-800 hover:underline font-medium">
+        Account Settings
+    </a>
+    
+    <form method="POST" action="http://127.0.0.1:8888/logout" class="inline">
+        @csrf
+        <button type="submit" class="text-red-600 hover:text-red-800 font-medium hover:underline ml-2">Log Out</button>
+    </form>
+</div>
     <main>
         @yield('content')
     </main>

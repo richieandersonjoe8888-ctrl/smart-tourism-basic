@@ -46,7 +46,31 @@
                 </div>
             @endif
         </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 pt-6 border-t border-gray-100">
+            <div>
+                <x-input-label for="age" :value="__('Age (Optional)')" />
+                <x-text-input id="age" name="age" type="number" class="mt-1 block w-full" :value="old('age', $user->age)" />
+                <x-input-error class="mt-2" :messages="$errors->get('age')" />
+            </div>
 
+            <div>
+                <x-input-label for="gender" :value="__('Gender (Optional)')" />
+                <x-text-input id="gender" name="gender" type="text" class="mt-1 block w-full" :value="old('gender', $user->gender)" placeholder="e.g., Male, Female, Non-binary" />
+                <x-input-error class="mt-2" :messages="$errors->get('gender')" />
+            </div>
+
+            <div>
+                <x-input-label for="country_of_origin" :value="__('Country of Origin (Optional)')" />
+                <x-text-input id="country_of_origin" name="country_of_origin" type="text" class="mt-1 block w-full" :value="old('country_of_origin', $user->country_of_origin)" />
+                <x-input-error class="mt-2" :messages="$errors->get('country_of_origin')" />
+            </div>
+
+            <div>
+                <x-input-label for="city_of_origin" :value="__('City of Origin (Optional)')" />
+                <x-text-input id="city_of_origin" name="city_of_origin" type="text" class="mt-1 block w-full" :value="old('city_of_origin', $user->city_of_origin)" />
+                <x-input-error class="mt-2" :messages="$errors->get('city_of_origin')" />
+            </div>
+        </div>
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 

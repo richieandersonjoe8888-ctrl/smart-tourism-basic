@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'status',
     'age',
     'gender',
-    'nationality',
+    'country_of_origin',
     'city_of_origin'
 ])]
 #[Hidden(['password', 'remember_token'])]
