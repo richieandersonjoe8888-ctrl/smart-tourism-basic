@@ -12,3 +12,6 @@ Route::get('/login', function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/api/blogs/store', [BlogServiceController::class, 'store'])->name('blog.service.store');
 });
+
+// Public route to view all published blogs
+Route::get('/blogs', [BlogServiceController::class, 'index'])->name('blogs.index');

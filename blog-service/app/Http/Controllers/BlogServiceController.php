@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Auth;
 class BlogServiceController extends Controller
 {
     /**
+     * Display a listing of published blogs for public viewing.
+     */
+    public function index()
+    {
+        // Fetch published blogs with their authors, newest first
+        $blogs = Blog::with('user')->where('status', 'published')->latest()->get();
+        return view('blogs.index', compact('blogs'));
+    }
+
+    /**
      * Action: Accept binary file streams and commit articles to the database
      */
     public function store(Request $request)

@@ -2,7 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form id="login-form" method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -44,4 +44,28 @@
             </x-primary-button>
         </div>
     </form>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            try {
+                // Call the new API to get the token
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: formData
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    // Save token to localStorage for use with blog-service and vendor-service
+                    localStorage.setItem('api_token', data.token);
+                }
+            } catch(err) {
+                console.error("Failed to fetch API token", err);
+            }
+            
+            // Continue with the standard Breeze web login
+            this.submit();
+        });
+    </script>
 </x-guest-layout>

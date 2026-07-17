@@ -2,13 +2,14 @@
 
 1. Complete the auth service
 
-- Create profile table
-- Create user table
-- Create Registration screen
-- Create Login screen
-- Create profile edit screen (tourist)
-- ~~Create profile edit screen (vendor)~~
-- Do jwt token related features (idk what this entails atw)
+- [x] Create profile table
+- [x] Create user table
+- [x] Create Registration screen
+- [x] Create Login screen
+- [x] Create profile edit screen (tourist)
+- [x] ~~Create profile edit screen (vendor)~~
+- ~~Do jwt token related features (idk what this entails atw)~~
+- Implement Laravel Sanctum for API authentication (returns 401 Unauthorized for API routes instead of redirecting to login)
 - Vendors are not user (for this system). Vendors belongs to a user. "Vendor" is a status that offers:
   1. Access to vendors' permission
   2. Ability to edit a particular company.
