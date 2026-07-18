@@ -68,26 +68,30 @@
                         
                         <!-- Blog Content -->
                         <div class="p-8 flex-1 flex flex-col relative bg-white">
-                            <h2 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors duration-200 leading-tight">
-                                {{ $blog->title }}
-                            </h2>
+                            <a href="{{ route('blogs.show', $blog->id) }}" class="block">
+                                <h2 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors duration-200 leading-tight">
+                                    {{ $blog->title }}
+                                </h2>
+                            </a>
                             <div class="text-slate-600 text-sm mb-8 flex-1 leading-relaxed line-clamp-3">
                                 {!! nl2br(e(strip_tags($blog->content))) !!}
                             </div>
                             
-                            <!-- Author Footer -->
-                            <div class="flex items-center mt-auto pt-5 border-t border-slate-100">
-                                <div class="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold shadow-md ring-4 ring-white shadow-indigo-200">
-                                    {{ strtoupper(substr($blog->user->name ?? 'V', 0, 1)) }}
-                                </div>
-                                <div class="ml-4">
-                                    <p class="text-sm font-bold text-slate-900">{{ $blog->user->name ?? 'Verified Vendor' }}</p>
-                                    <div class="flex items-center text-xs text-slate-500 mt-0.5 space-x-2">
-                                        <span>{{ $blog->created_at->format('M d, Y') }}</span>
-                                        <span>&bull;</span>
-                                        <span class="flex items-center"><svg class="w-3.5 h-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> {{ max(1, ceil(str_word_count(strip_tags($blog->content)) / 200)) }} min read</span>
+                            <!-- Author Footer and Read More Button -->
+                            <div class="flex items-center justify-between mt-auto pt-5 border-t border-slate-100">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold shadow-md ring-2 ring-white shadow-indigo-200">
+                                        {{ strtoupper(substr($blog->user->name ?? 'V', 0, 1)) }}
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-bold text-slate-900">{{ $blog->user->name ?? 'Verified Vendor' }}</p>
+                                        <p class="text-xs text-slate-500">{{ $blog->created_at->format('M d, Y') }}</p>
                                     </div>
                                 </div>
+                                
+                                <a href="{{ route('blogs.show', $blog->id) }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+                                    Read Full <span aria-hidden="true" class="ml-1">&rarr;</span>
+                                </a>
                             </div>
                         </div>
                     </article>

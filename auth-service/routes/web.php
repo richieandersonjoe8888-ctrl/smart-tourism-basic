@@ -5,9 +5,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorApplicationController;
 use App\Http\Controllers\ProfileController; // 1. IMPORT THIS CONTROLLER
 
-// Default welcome page
+// Default welcome page - aborts with 404
 Route::get('/', function () {
-    return view('welcome');
+    abort(404);
 });
 
 // Standard user dashboard home

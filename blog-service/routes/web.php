@@ -9,9 +9,12 @@ Route::get('/login', function () {
 })->name('login');
 
 // Protected channel processing blog creations
-Route::middleware(['auth'])->group(function () {
-    Route::post('/api/blogs/store', [BlogServiceController::class, 'store'])->name('blog.service.store');
+Route::middleware(['auth', 'role:vendor'])->group(function () {
+    Route::post('/blogs', [BlogServiceController::class, 'store'])->name('blogs.store');
 });
+
+// Single blog view page
+Route::get('/blogs/{id}', [BlogServiceController::class, 'show'])->name('blogs.show');
 
 // Public route to view all published blogs
 Route::get('/blogs', [BlogServiceController::class, 'index'])->name('blogs.index');

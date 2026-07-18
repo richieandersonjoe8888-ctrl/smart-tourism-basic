@@ -55,7 +55,14 @@
 
             <div>
                 <x-input-label for="gender" :value="__('Gender (Optional)')" />
-                <x-text-input id="gender" name="gender" type="text" class="mt-1 block w-full" :value="old('gender', $user->gender)" placeholder="e.g., Male, Female, Non-binary" />
+                <select id="gender" name="gender" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <option value="">Select Gender...</option>
+                    <option value="Male" {{ old('gender', $user->gender) === 'Male' ? 'selected' : '' }}>Male</option>
+                    <option value="Female" {{ old('gender', $user->gender) === 'Female' ? 'selected' : '' }}>Female</option>
+                    @if(!in_array(old('gender', $user->gender), ['Male', 'Female', null, '']))
+                        <option value="{{ old('gender', $user->gender) }}" selected>{{ ucfirst(old('gender', $user->gender)) }} (Current)</option>
+                    @endif
+                </select>
                 <x-input-error class="mt-2" :messages="$errors->get('gender')" />
             </div>
 

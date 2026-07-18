@@ -19,6 +19,21 @@ class BlogServiceController extends Controller
     }
 
     /**
+     * Display the specified blog post.
+     */
+    public function show($id)
+    {
+        $blog = Blog::with(['user', 'tags'])->findOrFail($id);
+        
+        // Ensure the blog is approved before showing it publicly
+        if ($blog->status !== 'approved') {
+            abort(403, 'This blog is not available for public viewing.');
+        }
+
+        return view('blogs.show', compact('blog'));
+    }
+
+    /**
      * Action: Accept binary file streams and commit articles to the database
      */
     public function store(Request $request)

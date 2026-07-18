@@ -11,20 +11,26 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable([
-    'email',
-    'password',
-    'status',
-    'age',
-    'gender',
-    'country_of_origin',
-    'city_of_origin'
-])]
-#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'status',
+        'age',
+        'gender',
+        'country_of_origin',
+        'city_of_origin'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     /**
      * Relationship: A user can belong to multiple roles.

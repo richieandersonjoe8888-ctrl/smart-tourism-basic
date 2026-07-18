@@ -16,15 +16,19 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <x-universal-header />
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative bg-cover bg-center" style="background-image: url('{{ asset('images/login_background.png') }}');">
+            <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+            
+            <div class="relative z-10 w-full sm:max-w-md mt-6 px-8 py-8 bg-white/80 backdrop-blur-lg shadow-2xl overflow-hidden sm:rounded-3xl border border-white/50">
+                <!-- App Icon anchored to the middle of the box -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
+                    <x-application-logo class="w-12 h-12 drop-shadow-sm" />
+                </div>
+                
+                <!-- Main Form Content -->
+                <div class="relative z-20">
+                    {{ $slot }}
+                </div>
             </div>
         </div>
     </body>

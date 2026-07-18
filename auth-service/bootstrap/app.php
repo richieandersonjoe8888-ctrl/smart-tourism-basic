@@ -14,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
+        ]);
      // This is the ONLY thing we add here: registering the middleware nickname
         $middleware->alias([
             'role' => \App\Http\Middleware\EnsureUserHasRole::class,
