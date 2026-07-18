@@ -14,7 +14,7 @@ class BlogServiceController extends Controller
     public function index()
     {
         // Fetch published blogs with their authors, newest first
-        $blogs = Blog::with('user')->where('status', 'published')->latest()->get();
+        $blogs = Blog::with('user')->where('status', 'approved')->latest()->get();
         return view('blogs.index', compact('blogs'));
     }
 

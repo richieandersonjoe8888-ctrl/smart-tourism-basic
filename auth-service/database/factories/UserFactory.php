@@ -34,7 +34,7 @@ class UserFactory extends Factory
             // Add your custom optional fields here
             'age' => fake()->optional(0.8)->numberBetween(18, 70), // 80% chance of generating an age
             'gender' => fake()->optional(0.7)->randomElement(['male', 'female',]),
-            'nationality' => fake()->optional(0.6)->country(),
+            'country_of_origin' => fake()->optional(0.6)->country(),
             'city_of_origin' => fake()->optional(0.6)->city(),
             'status' => fake()->randomElement(['active',]),
         ];
