@@ -3,10 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VendorController;
 
-// 1. THE Hub Redirection FIX: Place this at the very top of your file
+// Removed automatic redirect to enforce manual navigation via the Universal Header
 Route::get('/login', function () {
-    // Redirects the vendor browser node back to your Auth Service application
-    return redirect('http://127.0.0.1:8000/login'); 
+    abort(404); 
 })->name('login');
 
 Route::middleware(['auth', 'role:vendor'])->group(function () {

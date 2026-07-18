@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogServiceController;
 
-// Fallback login redirect mirror pointing back to the core hub
+// Removed automatic redirect to enforce manual navigation via the Universal Header
 Route::get('/login', function () {
-    return redirect('http://127.0.0.1:8000/login');
+    abort(404);
 })->name('login');
 
 // Protected channel processing blog creations
