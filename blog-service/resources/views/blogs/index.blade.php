@@ -29,9 +29,9 @@
         <div class="absolute top-0 right-1/4 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
 
         <div class="relative z-10">
-            <span class="text-sm font-bold tracking-widest text-indigo-600 uppercase mb-4 block">Travel & Discover</span>
-            <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">Explore <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-500">Amazing Places</span></h1>
-            <p class="text-xl text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">Read carefully curated stories and guides from our verified vendors to make your next trip absolutely unforgettable.</p>
+            <span class="text-sm font-bold tracking-widest text-indigo-600 uppercase mb-4 block">{{ __('Travel & Discover') }}</span>
+            <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">{!! __('Explore <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-500">Amazing Places</span>') !!}</h1>
+            <p class="text-xl text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">{{ __('Read carefully curated stories and guides from our verified vendors to make your next trip absolutely unforgettable.') }}</p>
         </div>
     </header>
 
@@ -40,8 +40,8 @@
         @if($blogs->isEmpty())
             <div class="text-center py-20 bg-white/50 rounded-3xl border border-dashed border-gray-300 max-w-3xl mx-auto">
                 <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5L18.5 7H20"></path></svg>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">No blogs published yet</h3>
-                <p class="text-gray-500 text-md">Check back soon! Our vendors are writing up some great content.</p>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('No blogs published yet') }}</h3>
+                <p class="text-gray-500 text-md">{{ __('Check back soon! Our vendors are writing up some great content.') }}</p>
             </div>
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -61,7 +61,7 @@
                             
                             <div class="absolute top-4 left-4 z-10">
                                 <span class="px-4 py-1.5 bg-white/95 backdrop-blur-md text-xs font-bold text-indigo-700 rounded-full shadow-sm tracking-widest uppercase">
-                                    Featured
+                                    {{ __('Featured') }}
                                 </span>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                                 </div>
                                 
                                 <a href="{{ route('blogs.show', $blog->id) }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
-                                    Read Full <span aria-hidden="true" class="ml-1">&rarr;</span>
+                                    {{ __('Read Full') }} <span aria-hidden="true" class="ml-1">&rarr;</span>
                                 </a>
                             </div>
                         </div>

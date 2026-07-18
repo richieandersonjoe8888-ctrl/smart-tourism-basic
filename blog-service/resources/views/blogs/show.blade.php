@@ -59,7 +59,7 @@
                     <span class="opacity-50">&bull;</span>
                     <span class="text-sm font-medium drop-shadow-md flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        {{ max(1, ceil(str_word_count(strip_tags($blog->content)) / 200)) }} min read
+                        {{ max(1, ceil(str_word_count(strip_tags($blog->content)) / 200)) }} {{ __('min read') }}
                     </span>
                 </div>
             </div>
@@ -75,7 +75,7 @@
         <!-- Back Navigation -->
         <div class="mt-12 text-center">
             <a href="{{ route('blogs.index') }}" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-indigo-700 bg-indigo-100 hover:bg-indigo-200 transition-colors shadow-sm hover:shadow-md">
-                &larr; Back to Discover
+                &larr; {{ __('Back to Discover') }}
             </a>
         </div>
     </main>
