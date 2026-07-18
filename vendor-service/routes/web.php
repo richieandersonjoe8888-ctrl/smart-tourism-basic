@@ -6,7 +6,7 @@ use App\Http\Controllers\VendorController;
 // 1. THE Hub Redirection FIX: Place this at the very top of your file
 Route::get('/login', function () {
     // Redirects the vendor browser node back to your Auth Service application
-    return redirect('http://127.0.0.1:8888/login'); 
+    return redirect('http://127.0.0.1:8000/login'); 
 })->name('login');
 
 Route::middleware(['auth', 'role:vendor'])->group(function () {

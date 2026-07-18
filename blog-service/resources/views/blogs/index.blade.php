@@ -19,20 +19,8 @@
 </head>
 <body class="bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50 min-h-screen text-gray-800">
 
-    <!-- Navigation Bar -->
-    <nav class="glass-card sticky top-0 z-50 shadow-sm transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer transition-transform hover:scale-105">
-                    <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">SmartTourism</span>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="http://127.0.0.1:8888/login" class="px-5 py-2 rounded-full font-medium text-sm text-indigo-600 bg-white border border-indigo-100 shadow-sm hover:shadow-md hover:bg-indigo-50 transition-all duration-200 ease-in-out">Sign In</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Universal Navigation Header -->
+    <x-universal-header />
 
     <!-- Header Hero Section -->
     <header class="pt-24 pb-16 text-center px-4 relative overflow-hidden">
