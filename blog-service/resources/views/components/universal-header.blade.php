@@ -43,10 +43,17 @@
             <div class="flex items-center space-x-4">
                 <!-- Language Switcher -->
                 <div class="relative inline-block text-left mr-2">
-                    <select onchange="const url = new URL(window.location.href); url.searchParams.set('lang', this.value); window.location.href = url.href; window.location.reload();" class="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-md text-xs font-semibold text-gray-700 py-1 pl-2 pr-6 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer transition-all w-auto appearance-none" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%234a5568\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\' clip-rule=\'evenodd\'/%3E%3C/svg%3E'); background-position: right 0.4rem center; background-repeat: no-repeat; background-size: 0.9em;">
-                        <option value="en" {{ App::getLocale() === 'en' ? 'selected' : '' }}>EN</option>
-                        <option value="id" {{ App::getLocale() === 'id' ? 'selected' : '' }}>ID</option>
-                    </select>
+                    <form action="" method="GET" class="m-0 p-0 inline">
+                        @foreach(request()->query() as $key => $value)
+                            @if($key !== 'lang' && is_string($value))
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
+                        @endforeach
+                        <select name="lang" onchange="this.form.submit()" class="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-md text-xs font-semibold text-gray-700 py-1 pl-2 pr-6 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer transition-all w-16 appearance-none" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%234a5568\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\' clip-rule=\'evenodd\'/%3E%3C/svg%3E'); background-position: right 0.4rem center; background-repeat: no-repeat; background-size: 0.9em;">
+                            <option value="en" {{ App::getLocale() === 'en' ? 'selected' : '' }}>EN</option>
+                            <option value="id" {{ App::getLocale() === 'id' ? 'selected' : '' }}>ID</option>
+                        </select>
+                    </form>
                 </div>
 
                 @guest
