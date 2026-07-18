@@ -22,6 +22,7 @@
                                 <th class="p-3">{{ __('Account State') }}</th>
                                 <th class="p-3">{{ __('System Permissions (Roles)') }}</th>
                                 <th class="p-3">{{ __('Creation Date') }}</th>
+                                <th class="p-3 text-right">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 text-sm">
@@ -45,6 +46,11 @@
                                     </td>
                                     <td class="p-3 text-xs text-gray-500">
                                         {{ $registeredUser->created_at ? $registeredUser->created_at->format('M d, Y') : 'Pre-seeded' }}
+                                    </td>
+                                    <td class="p-3 text-right">
+                                        <a href="{{ route('vendor.users.show', $registeredUser->id) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold text-xs bg-indigo-50 hover:bg-indigo-100 px-3 py-1 rounded transition-colors">
+                                            {{ __('View Profile') }}
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -14,6 +14,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
 
     // 2. MAKE SURE THIS LINE HAS THE EXACT NAME MATCHING BELOW:
     Route::get('/vendor/users', [VendorController::class, 'userRegistry'])->name('vendor.users.index');
+    Route::get('/vendor/users/{id}', [VendorController::class, 'showUser'])->name('vendor.users.show');
 
     // 3. Form Action Endpoints
     Route::post('/vendor/blog', [VendorController::class, 'storeBlog'])->name('vendor.blog.store');

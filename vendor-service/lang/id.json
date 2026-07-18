@@ -65,5 +65,15 @@
   "Account Email": "Email Akun",
   "Account State": "Status Akun",
   "System Permissions (Roles)": "Izin Sistem (Peran)",
-  "Creation Date": "Tanggal Dibuat"
+  "Creation Date": "Tanggal Dibuat",
+  "Account Meta": "Meta Akun",
+  "No Roles Assigned": "Tidak Ada Peran yang Ditetapkan",
+  "Back to User Directory": "Kembali ke Direktori Pengguna",
+  "Not Provided": "Tidak Tersedia",
+  "Pre-seeded": "Sudah Tersedia (Bawaan)",
+  "Actions": "Tindakan",
+  "View Profile": "Lihat Profil",
+  "user": "pengguna",
+  "vendor": "vendor",
+  "admin": "admin"
 }

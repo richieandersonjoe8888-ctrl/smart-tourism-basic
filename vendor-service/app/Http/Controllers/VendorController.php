@@ -70,15 +70,21 @@ class VendorController extends Controller
         return back()->with('success', 'Core storefront configuration profiles successfully synchronized!');
     }
 
-    /**
-     * 3. Global Customer Registry Link
-     * Fulfills administrative operational read-access to complete system account profiles.
-     */
     public function userRegistry()
     {
         // Pull down complete user accounts tracking profiles with their attached system permissions
         $users = User::with('roles')->orderBy('id', 'desc')->paginate(10);
 
-        return view('vendor.users-index', compact('users'));
+        return view('vendor.user-index', compact('users'));
+    }
+
+    /**
+     * 4. Show User Profile Details
+     * Displays complete profile information for a specific user.
+     */
+    public function showUser($id)
+    {
+        $user = User::with('roles')->findOrFail($id);
+        return view('vendor.user-show', compact('user'));
     }
 }

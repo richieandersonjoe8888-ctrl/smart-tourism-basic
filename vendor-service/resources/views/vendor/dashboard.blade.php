@@ -85,10 +85,14 @@
                         class="space-y-4 pt-2">
                         @csrf
                         <div>
-                            <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Article Title') }}</label>
-                            <input type="text" name="title" id="title"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="{{ __('e.g., Top 5 Hidden Exhibits This Week') }}" required>
+                            <div class="flex justify-between items-center">
+                                <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Article Title') }}</label>
+                                <span id="title-counter" class="text-xs text-gray-400 font-medium">0/50</span>
+                            </div>
+                            <textarea name="title" id="title" rows="2" maxlength="50"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm resize-none"
+                                placeholder="{{ __('e.g., Top 5 Hidden Exhibits This Week') }}" required
+                                oninput="document.getElementById('title-counter').innerText = this.value.length + '/50'"></textarea>
                         </div>
 
                         <div>

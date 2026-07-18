@@ -65,5 +65,15 @@
   "Account Email": "Account Email",
   "Account State": "Account State",
   "System Permissions (Roles)": "System Permissions (Roles)",
-  "Creation Date": "Creation Date"
+  "Creation Date": "Creation Date",
+  "Account Meta": "Account Meta",
+  "No Roles Assigned": "No Roles Assigned",
+  "Back to User Directory": "Back to User Directory",
+  "Not Provided": "Not Provided",
+  "Pre-seeded": "Pre-seeded",
+  "Actions": "Actions",
+  "View Profile": "View Profile",
+  "user": "user",
+  "vendor": "vendor",
+  "admin": "admin"
 }
