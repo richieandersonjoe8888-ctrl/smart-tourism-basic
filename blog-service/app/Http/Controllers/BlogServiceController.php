@@ -62,7 +62,7 @@ class BlogServiceController extends Controller
         ]);
 
         // Redirect back across ports smoothly to the vendor dashboard interface
-        return redirect('http://127.0.0.1:8001/vendor/dashboard')
+        return redirect(config('services.vendor_service.url') . '/vendor/dashboard')
             ->with('success', 'Article successfully submitted to the publication queue via Blog Service Node!');
     }
 }

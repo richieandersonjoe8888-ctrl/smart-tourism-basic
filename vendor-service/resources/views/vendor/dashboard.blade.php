@@ -81,7 +81,7 @@
                     <h2 class="text-xl font-semibold text-gray-800 border-b pb-2">✍️ {{ __('Publish New Blog') }}</h2>
                     <p class="text-xs text-gray-500">{{ __('Draft articles are sent straight to the admin pipeline for moderation and approval before public distribution.') }}</p>
 
-                    <form action="http://127.0.0.1:9999/api/blogs/store" method="POST" enctype="multipart/form-data"
+                    <form action="{{ config('services.blog_service.url') }}/blogs" method="POST" enctype="multipart/form-data"
                         class="space-y-4 pt-2">
                         @csrf
                         <div>

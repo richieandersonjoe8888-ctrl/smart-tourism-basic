@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'blog_service' => [
+        'url' => env('BLOG_SERVICE_URL', 'http://127.0.0.1:8002'),
+    ],
+
 ];

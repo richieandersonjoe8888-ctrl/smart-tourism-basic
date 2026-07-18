@@ -42,7 +42,7 @@
                                     <span
                                         class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">Article
                                         Banner</span>
-                                    <img src="http://127.0.0.1:9999/storage/{{ $blog->image }}"
+                                    <img src="{{ config('services.blog_service.url') }}/storage/{{ $blog->image }}"
                                         class="w-full max-h-48 object-cover rounded-md border shadow-sm"
                                         alt="Blog submission cover banner preview">
                                 </div>
