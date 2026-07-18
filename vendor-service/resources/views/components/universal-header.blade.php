@@ -21,14 +21,18 @@
                     @auth
                         @php
                             $user = Auth::user();
-                            $hasRoleMethod = method_exists($user, 'hasRole');
+                            $roles = \Illuminate\Support\Facades\DB::table('role_user')
+                                ->join('roles', 'role_user.role_id', '=', 'roles.id')
+                                ->where('role_user.user_id', $user->id)
+                                ->pluck('roles.name')
+                                ->toArray();
                         @endphp
                         
-                        @if($hasRoleMethod && $user->hasRole('vendor'))
+                        @if(in_array('vendor', $roles))
                             <a href="{{ $baseUrl }}:{{ $vendorPort }}/vendor/dashboard" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 transition-colors">Store Dashboard</a>
                         @endif
                         
-                        @if($hasRoleMethod && $user->hasRole('admin'))
+                        @if(in_array('admin', $roles))
                             <a href="{{ $baseUrl }}:{{ $authPort }}/admin/panel" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 transition-colors">Admin Dashboard</a>
                         @endif
                     @endauth
