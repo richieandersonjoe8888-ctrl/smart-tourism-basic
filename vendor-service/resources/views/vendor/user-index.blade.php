@@ -4,24 +4,24 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4">
             
             <div class="text-xs text-gray-500">
-                <a href="{{ route('vendor.dashboard') }}" class="hover:underline">Dashboard</a> &rarr; <span class="text-gray-700 font-semibold">User Directory</span>
+                <a href="{{ route('vendor.dashboard') }}" class="hover:underline">{{ __('Dashboard') }}</a> &rarr; <span class="text-gray-700 font-semibold">{{ __('User Directory') }}</span>
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm rounded-lg border p-6">
                 <div class="mb-6">
-                    <h1 class="text-2xl font-bold text-gray-900">Global Customer Registry</h1>
-                    <p class="text-sm text-gray-600">Administrative operational read-access to complete system accounts profiles.</p>
+                    <h1 class="text-2xl font-bold text-gray-900">{{ __('Global Customer Registry') }}</h1>
+                    <p class="text-sm text-gray-600">{{ __('Administrative operational read-access to complete system accounts profiles.') }}</p>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-gray-50 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                <th class="p-3">User ID</th>
-                                <th class="p-3">Account Email</th>
-                                <th class="p-3">Account State</th>
-                                <th class="p-3">System Permissions (Roles)</th>
-                                <th class="p-3">Creation Date</th>
+                                <th class="p-3">{{ __('User ID') }}</th>
+                                <th class="p-3">{{ __('Account Email') }}</th>
+                                <th class="p-3">{{ __('Account State') }}</th>
+                                <th class="p-3">{{ __('System Permissions (Roles)') }}</th>
+                                <th class="p-3">{{ __('Creation Date') }}</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 text-sm">

@@ -78,7 +78,7 @@
                             </div>
                             
                             <!-- Author Footer and Read More Button -->
-                            <div class="flex items-center justify-between mt-auto pt-5 border-t border-slate-100">
+                            <div class="flex items-center justify-between mt-auto pt-5 border-t border-slate-100 gap-4">
                                 <div class="flex items-center">
                                     <div class="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold shadow-md ring-2 ring-white shadow-indigo-200">
                                         {{ strtoupper(substr($blog->user->name ?? 'V', 0, 1)) }}
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 
-                                <a href="{{ route('blogs.show', $blog->id) }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+                                <a href="{{ route('blogs.show', $blog->id) }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors shrink-0">
                                     {{ __('Read Full') }} <span aria-hidden="true" class="ml-1">&rarr;</span>
                                 </a>
                             </div>
