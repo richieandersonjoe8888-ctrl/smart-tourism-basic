@@ -75,5 +75,19 @@
   "View Profile": "View Profile",
   "user": "user",
   "vendor": "vendor",
-  "admin": "admin"
+  "admin": "admin",
+  "Administrative Moderation Panel": "Administrative Moderation Panel",
+  "Current Status:": "Current Status:",
+  "Reason:": "Reason:",
+  "Approve & Publish": "Approve & Publish",
+  "Reason for disabling...": "Reason for disabling...",
+  "Disable (Takedown)": "Disable (Takedown)",
+  "Re-Enable Publication": "Re-Enable Publication",
+  "Back to Admin Panel &rarr;": "Back to Admin Panel &rarr;",
+  "active": "active",
+  "frozen": "frozen",
+  "pending": "pending",
+  "approved": "approved",
+  "rejected": "rejected",
+  "disabled": "disabled"
 }

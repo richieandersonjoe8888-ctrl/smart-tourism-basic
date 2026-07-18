@@ -75,5 +75,19 @@
   "View Profile": "Lihat Profil",
   "user": "pengguna",
   "vendor": "vendor",
-  "admin": "admin"
+  "admin": "admin",
+  "Administrative Moderation Panel": "Panel Moderasi Administratif",
+  "Current Status:": "Status Saat Ini:",
+  "Reason:": "Alasan:",
+  "Approve & Publish": "Setujui & Terbitkan",
+  "Reason for disabling...": "Alasan menonaktifkan...",
+  "Disable (Takedown)": "Nonaktifkan (Pencabutan)",
+  "Re-Enable Publication": "Aktifkan Kembali Publikasi",
+  "Back to Admin Panel &rarr;": "Kembali ke Panel Admin &rarr;",
+  "active": "aktif",
+  "frozen": "dibekukan",
+  "pending": "ditunda",
+  "approved": "disetujui",
+  "rejected": "ditolak",
+  "disabled": "dinonaktifkan"
 }
