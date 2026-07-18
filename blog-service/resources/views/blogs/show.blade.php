@@ -19,6 +19,76 @@
 </head>
 <body class="bg-gray-50 min-h-screen text-gray-800 antialiased selection:bg-indigo-200 selection:text-indigo-900">
 
+    @if(Auth::check() && Auth::user()->hasRole('admin'))
+        <div class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-50 shadow-md text-white">
+            <div class="flex items-center gap-3">
+                <span class="text-xl">🛠️</span>
+                <div>
+                    <p class="text-sm font-bold tracking-wide uppercase text-slate-400">Administrative Moderation Panel</p>
+                    <p class="text-xs text-slate-300">
+                        Current Status: 
+                        <span class="font-semibold uppercase tracking-wider px-2 py-0.5 rounded text-[10px] 
+                            {{ $blog->status === 'approved' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : '' }}
+                            {{ $blog->status === 'pending' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' : '' }}
+                            {{ $blog->status === 'rejected' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' : '' }}
+                            {{ $blog->status === 'disabled' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : '' }}
+                        ">
+                            {{ $blog->status }}
+                        </span>
+                        @if($blog->moderation_reason)
+                            <span class="text-slate-400 block mt-1">Reason: "{{ $blog->moderation_reason }}"</span>
+                        @endif
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 flex-wrap">
+                <!-- Action Buttons depending on status -->
+                @if($blog->status === 'pending' || $blog->status === 'rejected')
+                    <form action="{{ route('admin.blogs.approve', $blog->id) }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-4 py-2 rounded-full transition shadow-sm">
+                            Approve & Publish
+                        </button>
+                    </form>
+                @endif
+
+                @if($blog->status === 'pending')
+                    <form action="{{ route('admin.blogs.reject', $blog->id) }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold px-4 py-2 rounded-full transition shadow-sm">
+                            Reject
+                        </button>
+                    </form>
+                @endif
+
+                @if($blog->status === 'approved')
+                    <form action="{{ route('admin.blogs.disable', $blog->id) }}" method="POST" class="flex items-center gap-2">
+                        @csrf
+                        <input type="text" name="moderation_reason" placeholder="Reason for disabling..." required
+                            class="text-xs rounded-full border-slate-700 bg-slate-850 text-white px-3 py-1.5 focus:ring-red-500 focus:border-red-500 min-w-[200px] border">
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-full transition shadow-sm whitespace-nowrap">
+                            Disable (Takedown)
+                        </button>
+                    </form>
+                @endif
+                
+                @if($blog->status === 'disabled')
+                    <form action="{{ route('admin.blogs.approve', $blog->id) }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-4 py-2 rounded-full transition shadow-sm">
+                            Re-Enable Publication
+                        </button>
+                    </form>
+                @endif
+                
+                <a href="{{ config('services.auth_service.url') }}/admin/panel" class="text-xs text-slate-400 hover:text-white transition font-medium underline ml-2">
+                    Back to Admin Panel &rarr;
+                </a>
+            </div>
+        </div>
+    @endif
+
     <!-- Universal Navigation Header -->
     <x-universal-header />
 

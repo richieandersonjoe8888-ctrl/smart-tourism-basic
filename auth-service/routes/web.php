@@ -34,6 +34,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/applications/{application}/handle', [AdminController::class, 'handleApplicationAction'])->name('admin.application.handle');
     Route::post('/admin/user/{user}/ban', [AdminController::class, 'toggleUserBan'])->name('admin.user.ban');
     Route::post('/admin/tags', [AdminController::class, 'storeTag'])->name('admin.tags.store');
+    Route::post('/admin/blogs/{blog}/handle', [AdminController::class, 'handleBlogAction'])->name('admin.blogs.handle');
+    Route::post('/admin/blogs/{blog}/disable', [AdminController::class, 'disableBlog'])->name('admin.blogs.disable');
 });
 
 // Core login / register sub-files link

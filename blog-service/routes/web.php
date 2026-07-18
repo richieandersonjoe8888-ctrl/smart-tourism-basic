@@ -13,6 +13,13 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::post('/blogs', [BlogServiceController::class, 'store'])->name('blogs.store');
 });
 
+// Admin-only blog moderation routes
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::post('/admin/blogs/{id}/approve', [BlogServiceController::class, 'approve'])->name('admin.blogs.approve');
+    Route::post('/admin/blogs/{id}/reject', [BlogServiceController::class, 'reject'])->name('admin.blogs.reject');
+    Route::post('/admin/blogs/{id}/disable', [BlogServiceController::class, 'disable'])->name('admin.blogs.disable');
+});
+
 // Single blog view page
 Route::get('/blogs/{id}', [BlogServiceController::class, 'show'])->name('blogs.show');
 

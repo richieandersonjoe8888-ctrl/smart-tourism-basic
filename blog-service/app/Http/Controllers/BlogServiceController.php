@@ -25,12 +25,50 @@ class BlogServiceController extends Controller
     {
         $blog = Blog::with(['user', 'tags'])->findOrFail($id);
         
-        // Ensure the blog is approved before showing it publicly
-        if ($blog->status !== 'approved') {
+        // Ensure the blog is approved before showing it publicly, unless the user is an admin
+        if ($blog->status !== 'approved' && !(Auth::check() && Auth::user()->hasRole('admin'))) {
             abort(403, 'This blog is not available for public viewing.');
         }
 
         return view('blogs.show', compact('blog'));
+    }
+
+    /**
+     * Action: Approve Blog from Moderation Bar
+     */
+    public function approve($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->update(['status' => 'approved', 'moderation_reason' => null]);
+        return back()->with('success', 'Blog article has been approved and published.');
+    }
+
+    /**
+     * Action: Reject Blog from Moderation Bar
+     */
+    public function reject($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->update(['status' => 'rejected']);
+        return back()->with('warning', 'Blog article was rejected.');
+    }
+
+    /**
+     * Action: Disable Blog from Moderation Bar
+     */
+    public function disable(Request $request, $id)
+    {
+        $request->validate([
+            'moderation_reason' => 'required|string|max:1000',
+        ]);
+
+        $blog = Blog::findOrFail($id);
+        $blog->update([
+            'status' => 'disabled',
+            'moderation_reason' => $request->moderation_reason,
+        ]);
+
+        return back()->with('warning', 'Blog article has been disabled with reason.');
     }
 
     /**

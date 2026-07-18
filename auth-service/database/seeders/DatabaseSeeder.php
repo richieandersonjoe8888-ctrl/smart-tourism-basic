@@ -40,5 +40,13 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
         $vendor->roles()->attach([$userRole->id, $vendorRole->id]);
+
+        // Create approved VendorApplication record so they can be unbanned cleanly
+        $vendor->vendorApplication()->create([
+            'shop_name' => 'Seeded Vendor Shop',
+            'physical_address' => 'Seeded Address',
+            'business_license_number' => 'SEEDED-123',
+            'status' => 'approved'
+        ]);
     }
 }

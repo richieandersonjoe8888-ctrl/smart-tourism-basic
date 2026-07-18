@@ -13,17 +13,17 @@
                         @foreach ($vendorRequests as $applicant)
                             <div class="py-3 flex justify-between items-center">
                                 <div>
-                                    <p class="font-medium text-gray-900">{{ $applicant->email }}</p>
+                                    <p class="font-medium text-gray-900">{{ $applicant->user->email }}</p>
                                     <p class="text-xs text-gray-500">Origin:
-                                        {{ $applicant->city_of_origin ?? 'Unknown' }}</p>
+                                        {{ $applicant->user->city_of_origin ?? 'Unknown' }}</p>
                                 </div>
-                                <form action="{{ route('admin.vendor.handle', $applicant) }}" method="POST"
+                                <form action="{{ route('admin.application.handle', $applicant) }}" method="POST"
                                     class="space-x-2">
                                     @csrf
                                     <button name="action" value="approve"
                                         class="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700">Approve</button>
-                                    <button name="action" value="deny"
-                                        class="bg-gray-500 text-white px-3 py-1 rounded text-xs hover:bg-gray-600">Deny</button>
+                                    <button name="action" value="reject"
+                                        class="bg-red-600 text-white px-3 py-1 rounded text-xs hover:bg-red-700">Reject</button>
                                 </form>
                             </div>
                         @endforeach
@@ -36,7 +36,11 @@
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">Blog Approval Queue</h2>
                     @foreach ($pendingBlogs as $blog)
                         <div class="border p-3 rounded mb-3 bg-gray-50">
-                            <h3 class="font-bold text-gray-900">{{ $blog->title }}</h3>
+                            <h3 class="font-bold text-gray-900 hover:text-indigo-650 transition">
+                                <a href="{{ config('services.blog_service.url') }}/blogs/{{ $blog->id }}" target="_blank">
+                                    {{ $blog->title }} (View &rarr;)
+                                </a>
+                            </h3>
                             @if ($blog->image)
                                 <div class="mb-4">
                                     <span
@@ -48,6 +52,14 @@
                                 </div>
                             @endif
                             <p class="text-xs text-gray-600 my-2">{{ Str::limit($blog->content, 100) }}</p>
+                            
+                            <form action="{{ route('admin.blogs.handle', $blog) }}" method="POST" class="mt-3 flex gap-2">
+                                @csrf
+                                <button name="action" value="approve"
+                                    class="bg-green-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-green-700 transition">Approve</button>
+                                <button name="action" value="reject"
+                                    class="bg-red-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-red-700 transition">Reject</button>
+                            </form>
                         </div>
                     @endforeach
                 </div>
@@ -55,12 +67,26 @@
                 <div class="bg-white shadow-sm sm:rounded-lg p-6">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">Active Publications (Takedown Guard)</h2>
                     @foreach ($activeBlogs as $blog)
-                        <div class="border p-3 rounded mb-3 flex justify-between items-start">
-                            <div>
-                                <h3 class="font-semibold text-gray-900">{{ $blog->title }}</h3>
-                                <p class="text-xs text-gray-500">Author ID: {{ $blog->user_id }}</p>
+                        <div class="border p-3 rounded mb-3 bg-gray-50 space-y-2">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 hover:text-indigo-650 transition">
+                                        <a href="{{ config('services.blog_service.url') }}/blogs/{{ $blog->id }}" target="_blank">
+                                            {{ $blog->title }} (View &rarr;)
+                                        </a>
+                                    </h3>
+                                    <p class="text-xs text-gray-500">Author ID: {{ $blog->user_id }}</p>
+                                </div>
                             </div>
-                            <button class="text-xs text-red-600 hover:underline">Disable with Reason</button>
+                            <!-- Form for disable with reason -->
+                            <form action="{{ route('admin.blogs.disable', $blog) }}" method="POST" class="mt-2 flex gap-2">
+                                @csrf
+                                <input type="text" name="moderation_reason" placeholder="Reason for takedown..." required
+                                    class="text-xs rounded border-gray-300 w-full px-2 py-1 focus:ring-red-500 focus:border-red-500">
+                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold hover:bg-red-700 transition whitespace-nowrap">
+                                    Disable
+                                </button>
+                            </form>
                         </div>
                     @endforeach
                 </div>

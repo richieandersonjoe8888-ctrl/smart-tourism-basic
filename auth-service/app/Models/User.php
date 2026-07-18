@@ -41,6 +41,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship: A user can belong to multiple tags.
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'role_user_tag');
+    }
+
+    /**
      * Helper: Check if the user has a specific role.
      */
     public function hasRole(string $roleName): bool
